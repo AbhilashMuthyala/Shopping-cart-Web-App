@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Necklace</title>
+    <script type="text/javascript" src="function.js">
+
+    </script>
+    <style type = "text/css">
+         .hidden{
+            visibility:hidden;
+        }
+     form  label {
+	display: block;
+	float: left;
+	width:150px;
+    position:absolute;
+    left: 400px;
+    font: bold;
+}
+     form input{
+         position:absolute;
+         left: 550px;
+     }
+     input:invalid {
+    border-color: orangered;
+}
+
+input:valid {
+    border-color: green;
+}
+div{
+   
+    background-color: #FFFFFF;
+}
+        </style>
+</head>
+<body>
+    <div>
+<form action="http://localhost:8080/" method="post" >
+    <h1 style="font-style: normal; font-weight: bold" align=center id="ItemName">Necklace</h1>
+    <table align="center">
+     <tr>
+     <td ><img src="web-content/images/products/jewelry/pendent4.jpg" alt="" style="height: 220px; width: 220px"/></td></table>
+     <p align="center" style="font-style: italic; color:#000000; font-family: Calibri; font-size: xx-large;">A very beautiful ornamental necklace.</p>
+     <p align="center" style="color: #000000; font-family: 'Times New Roman', Times, serif; font-weight: bold;">Price <br /><br />$500.00</p>
+   
+        <label >Quantity:</label><input type="text" maxlength="2" name="quantity" id="quantity" required="required" pattern="[0-9]+" " title="Enter a Quantity from 1-99" /><br />
+        <p align="center"><img src="web-content/images/products/atc.bmp" alt="" onclick="atc()"/></p>
+       
+</form></div>
+    <h2 style="color:#4F2D7F;" align="center"><B><a href="store_index.html">Continue Shopping</a></B></h2>
+    <h2 class="hidden" id="imagelink">web-content/images/products/jewelry/pendent4.jpg</h2>
+    <h2 class="hidden" id="catalog">6</h2>
+    <h2 class="hidden" id="price">500.00</h2>
+</body>
+</html>

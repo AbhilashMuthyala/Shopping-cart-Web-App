@@ -1,0 +1,347 @@
+<html>
+
+<head>
+<style>
+
+#headersection
+{
+
+margin:auto;
+text-align:center;
+border-bottom:1px solid;
+}
+
+#usererror,#passworderror,#Cusererror, #Cpassworderror, #Cpassworderror1,#emailerror
+{
+color:red;
+}
+#div1{
+ width: 50%;
+  float:left;
+  margin: auto;
+
+}
+#div2{
+    margin:auto;
+
+    display:none;
+ width: 50%;
+  float:right;
+}
+#div3{
+    margin:auto;
+
+    display:block;
+ 
+}
+#create
+{
+display:block;
+}
+#message, #login
+{
+
+display:none;
+
+
+}
+ input:invalid {
+    border-color: orangered;
+}
+
+input:valid {
+    border-color: green;
+}
+</style>
+<script>
+function createInfoDisplay()
+{
+	  document.getElementById("div2").style.display='block'; 
+      document.getElementById("div3").style.display='none'; 
+}
+
+function passwordMatch()
+{
+var password=document.getElementById('Cpassword').value;
+var rpassword=document.getElementById('Repassword').value;
+if(password==rpassword)
+{
+		document.getElementById('Cpassworderror1').innerHTML=' ';
+}
+else
+{
+		document.getElementById('Cpassworderror1').innerHTML='Password doesnot Match';
+}
+}
+
+function emailValidation()
+{
+var email=document.getElementById('email').value;
+ var atpos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) {
+       // alert("pass");
+        
+		document.getElementById('emailerror').innerHTML='Please Enter a Valid email ';
+		
+}
+else
+{
+		document.getElementById('emailerror').innerHTML=' ';
+}
+}
+function Cpassword()
+{
+var password=document.getElementById('Cpassword').value;
+var n = password.length;
+var matches = password.match(/\d+/g);
+
+if(n<6){
+
+		document.getElementById('Cpassworderror').innerHTML='Please Enter a Valid password';
+}
+
+else if(n>16)
+{
+		document.getElementById('Cpassworderror').innerHTML='Please Enter a Valid password';
+
+}
+else if(matches == null)
+{
+		document.getElementById('Cpassworderror').innerHTML='Please Enter a Valid password';
+
+}
+else
+{
+		document.getElementById('Cpassworderror').innerHTML=' ';
+
+}
+}
+function Cusername()
+{
+var username=document.getElementById('Cusername').value;
+var n = username.length;
+if(n<6)
+{
+		document.getElementById('Cusererror').innerHTML='Required field is Not Valid-Please enter data';
+
+}
+
+else if(n>16)
+{
+		document.getElementById('Cusererror').innerHTML='Required field is Not Valid-Please enter data';
+
+}
+else{
+		document.getElementById('Cusererror').innerHTML='';
+		validate(username);
+		       
+
+}
+}
+
+		
+
+      function validate(a) 
+      {
+	  var req;
+        // var idField = document.getElementById("Cusername").value();
+         var url = "http://localhost:8090/validateUsername.php?username=" + a + "&XDEBUG_SESSION_START=test";
+         req = new XMLHttpRequest();
+         
+         
+         req.onreadystatechange = function() {
+                           if (this.readyState == 4 && this.status == 200) {
+						   //   alert(this.responseText);
+                               document.getElementById("Cusererror").innerHTML =this.responseText;
+                                         }};
+		req.open("GET", url, true);								 
+         req.send();
+      }
+function datapost()
+{
+var username=document.getElementById('Cusername').value;
+var password=document.getElementById('Cpassword').value;
+var email=document.getElementById('email').value;
+var rpassword=document.getElementById('Repassword').value;
+
+if(username.length==0||password.length==0||email.length==0||rpassword.length==0)
+{
+alert("please enter all the fields");
+ return;
+}
+process(username,password,email);
+}
+
+ function process(a,b,c) 
+      {
+	  var req;
+        // var idField = document.getElementById("Cusername").value();
+         var url = "http://localhost:8090/storedata.php?username=" + a + "&password="+ b + "&email=" + c + "&XDEBUG_SESSION_START=test";
+         req = new XMLHttpRequest();
+         
+         
+         req.onreadystatechange = function() {
+                           if (this.readyState == 4 && this.status == 200) {
+						        //  alert(this.responseText);
+                              	  document.getElementById("message").style.display='block'; 
+                              	  document.getElementById("login").style.display='block'; 
+                              	  document.getElementById("create").style.display='none'; 
+
+                                         }};
+		req.open("GET", url, true);								 
+         req.send();
+      }
+function validateUser()
+{
+var username=document.getElementById('username').value;
+if(username.length==0)
+{
+                               document.getElementById("usererror").innerHTML ="Please Enter a Username";
+
+
+}
+else
+{
+validateUserAjax(username);
+}
+
+
+}
+function validateUserAjax(a) 
+      {
+	  var req;
+        // var idField = document.getElementById("Cusername").value();
+         var url = "http://localhost:8090/validateUsernameAjax.php?username=" + a + "&XDEBUG_SESSION_START=test";
+         req = new XMLHttpRequest();
+         
+         
+         req.onreadystatechange = function() {
+                           if (this.readyState == 4 && this.status == 200) {
+						   //   alert(this.responseText);
+                               document.getElementById("usererror").innerHTML =this.responseText;
+                                         }};
+		req.open("GET", url, true);								 
+         req.send();
+      }
+	  
+	  function loginValidation()
+	  {
+	  var username=document.getElementById('username').value;
+var password=document.getElementById('password').value;
+
+	  loginValidationAjax(username,password);
+	  
+	  }
+	  function loginValidationAjax(a,b) 
+      {
+	  var req;
+        // var idField = document.getElementById("Cusername").value();
+         var url = "http://localhost:8090/loginValidation.php?username=" + a + "&password="+ b + "&XDEBUG_SESSION_START=test";
+         req = new XMLHttpRequest();
+         
+         
+         req.onreadystatechange = function() {
+                           if (this.readyState == 4 && this.status == 200) {
+						   //   alert(this.responseText);
+						   if(parseInt(this.response)=='1')
+						   {
+						    window.location.href='members.html';
+						   }
+                             else{ 	
+                               document.getElementById("passworderror").innerHTML =this.responseText;
+}
+                                         }};
+		req.open("GET", url, true);								 
+         req.send();
+      }
+</script>
+</head>
+
+<body>
+<div id="headersection">
+<h1>Account Login/Creation</h1>
+<p>Members receive a monthly newsletter and email alerts on upcoming events</p>
+
+</div>
+<div id="div1">
+<h4> Current Members: Enter your Username and Password</h4>
+<table>
+<tr>
+<td>Username:</td>
+
+</tr>
+<tr>
+<td><input type="text" id="username" onchange="validateUser()"/></td>
+<td ><p id="usererror"></p></td>
+</tr>
+<tr>
+<td>Password:</td>
+</tr>
+<tr>
+<td><input type="text" id="password"/></td>
+<td ><p id="passworderror"></p></td>
+</tr>
+<tr>
+  <td><button id="login1" type="submit" onclick="loginValidation()" />Log in</button></td>
+</tr>
+</table>
+</div>
+
+
+
+    
+<div id="div3">
+ <h4> Not a member? Create a new account now!!</h4>
+        <h4>Create new Account below</h4>
+<button type="button" onclick="createInfoDisplay()">Create Account</button>
+
+</div>
+    <div id="div2">
+        <h4> Not a member? Create a new account now!!</h4>
+        <h4>Create new Account below</h4>
+        <table>
+            <tr>
+                <td>Username(Must be atleast 6 characters)</td>
+
+            </tr>
+            <tr>
+                <td><input type="text" maxlength="16" id="Cusername" required="required" onchange="Cusername()" /></td>
+                <td><p id="Cusererror"></p></td>
+            </tr>
+            <tr>
+                <td>Password(Must be atleast 6 characters and 1 numeric)</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="Cpassword" maxlength="16" required="required" onchange="Cpassword()"/></td>
+                <td><p id="Cpassworderror"></p></td>
+            </tr>
+			<tr>
+                <td>Re-Enter Password</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="Repassword" maxlength="16" required="required" onchange="passwordMatch()" /></td>
+                <td><p id="Cpassworderror1"></p></td>
+            </tr>
+			<tr>
+                <td>Email</td>
+            </tr>
+            <tr>
+                <td><input type="text" id="email" required="required" onchange="emailValidation()" /></td>
+                <td><p id="emailerror"></p></td>
+            </tr>
+            <tr>
+                <td><button id="create" type="button" value="submit" onclick="datapost()"/>Create Now</button></td>
+				
+				                <td><p id="message">LOGIN NOW!!!</p></td>
+                <td><button id="login" type="reset"  onclick="location.href='members.html'"/>Log in</button></td>
+
+            </tr>
+        </table>
+    </div>
+
+
+</body>
+
+
+</html>

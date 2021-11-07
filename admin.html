@@ -1,0 +1,73 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background: #808080;
+        }
+
+        #textareaholder, h1 {
+            text-align: center;
+        }
+
+        textarea {
+            background: #A59F9F;
+        }
+
+        #titlesection {
+            margin: 0 auto;
+        }
+
+        textarea {
+            width: 600px;
+            height: 300px;
+            border: 2px solid;
+        }
+
+        #buttonarea {
+            margin-left: 30%;
+        }
+
+        #submitbutton {
+            margin-left: 486px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Administrative Blog Form</h1>
+    <div id="titlesection">
+
+        <form action="http://localhost:8090/process.php?XDEBUG_SESSION_START=test2" method="POST" enctype="multipart/form-data">
+            <center>
+                <table>
+                    <tr>
+                        <td>Name:</td>
+                        <td> <input type="text" value="" name="blogname" id="blogname" placeholder="Please enter the blog name" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Title:</td>
+                        <td><input type="text" value="" name="blogtitle" id="blogtitle" placeholder="Please enter the blog title" required /></td>
+                    </tr>
+                    <tr>
+                        <td>Image:</td>
+                        <td><input type="file" name="blogimage" id="blogimage" required /></td>
+                    </tr>
+                </table>
+            </center>
+
+            <h1>Enter Blog Below</h1>
+            <p id="textareaholder"><textarea placeholder="Enter Description here" name="blogdesc" required></textarea></p>
+            <div id="buttonarea">
+                <input type="reset" value="reset" />
+                <input type="submit" id="submitbutton" value="submit" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>
